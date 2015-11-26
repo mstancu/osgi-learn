@@ -290,6 +290,16 @@ public class PaintFrame extends JFrame implements MouseListener, MouseMotionList
     }
 
     /**
+     * Simple action listener for shape tool bar buttons that sets the drawing
+     * frame's currently selected shape when receiving an action event.
+     **/
+    private class ShapeActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            selectShape(evt.getActionCommand());
+        }
+    }
+
+    /**
      * This class is used to record the various information pertaining to an
      * available shape.
      **/
@@ -303,15 +313,5 @@ public class PaintFrame extends JFrame implements MouseListener, MouseMotionList
             this.icon = icon;
             this.shape = shape;
         }
-    }
-
-    /**
-     * Simple action listener for shape tool bar buttons that sets the drawing
-     * frame's currently selected shape when receiving an action event.
-     **/
-    private class ShapeActionListener implements ActionListener {
-        public void actionPerformed(ActionEvent evt) {
-            selectShape(evt.getActionCommand());
-        }
-    }
+	}
 }
