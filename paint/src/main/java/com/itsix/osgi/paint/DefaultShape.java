@@ -47,79 +47,60 @@ import com.itsix.osgi.shape.SimpleShape;
  * approach.
  **/
 class DefaultShape implements SimpleShape {
-	private SimpleShape shape;
-	private ImageIcon icon;
-	private BundleContext context;
-	private ServiceReference reference;
+    private SimpleShape shape;
+    private ImageIcon icon;
 
-	/**
-	 * This constructs a placeholder shape that draws a default icon. It is used
-	 * when a previously drawn shape is no longer available.
-	 **/
-	public DefaultShape() {
-		// Do nothing.
-	}
+    /**
+     * This constructs a placeholder shape that draws a default icon. It is used
+     * when a previously drawn shape is no longer available.
+     **/
+    public DefaultShape() {
+        // Do nothing.
+    }
 
+    public DefaultShape(SimpleShape shape) {
+        this.shape = shape;
+    }
 
-	public DefaultShape(SimpleShape shape) {
-		this.shape = shape;
-	}
+    /**
+     * This method tells the proxy to dispose of its service object; this is
+     * called when the underlying service goes away.
+     **/
+    public void dispose() {
+        shape = null;
+    }
 
-	/**
-	 * This method tells the proxy to dispose of its service object; this is
-	 * called when the underlying service goes away.
-	 **/
-	public void dispose() {
-		if (shape != null) {
-			context.ungetService(reference);
-			context = null;
-			reference = null;
-			shape = null;
-		}
-	}
+    /**
+     * Implements the <tt>SimpleShape</tt> interface method. When acting as a
+     * proxy, this method gets the shape service and then uses it to draw the
+     * shape. When acting as a placeholder shape, this method draws the default
+     * icon.
+     * 
+     * @param g2
+     *            The graphics object used for painting.
+     * @param p
+     *            The position to paint the triangle.
+     **/
+    public void draw(Graphics2D g2, Point p) {
+        if (shape != null) {
+            // Draw the shape.
+            shape.draw(g2, p);
+            // If everything was successful, then simply return.
+            return;
+        }
 
-	/**
-	 * Implements the <tt>SimpleShape</tt> interface method. When acting as a
-	 * proxy, this method gets the shape service and then uses it to draw the
-	 * shape. When acting as a placeholder shape, this method draws the default
-	 * icon.
-	 * 
-	 * @param g2
-	 *            The graphics object used for painting.
-	 * @param p
-	 *            The position to paint the triangle.
-	 **/
-	public void draw(Graphics2D g2, Point p) {
-		// If this is a proxy shape, instantiate the shape class
-		// and use it to draw the shape.
-		if (context != null) {
-			try {
-				if (shape == null) {
-					// Get the shape service.
-					shape = (SimpleShape) context.getService(reference);
-				}
-				// Draw the shape.
-				shape.draw(g2, p);
-				// If everything was successful, then simply return.
-				return;
-			} catch (Exception ex) {
-				// This generally should not happen, but if it does then
-				// we can just fall through and paint the default icon.
-			}
-		}
-
-		// If the proxied shape could not be drawn for any reason or if
-		// this shape is simply a placeholder, then draw the default icon.
-		if (icon == null) {
-			try {
-				icon = new ImageIcon(getClass().getResource("/underc.png"));
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				g2.setColor(Color.red);
-				g2.fillRect(0, 0, 60, 60);
-				return;
-			}
-		}
-		g2.drawImage(icon.getImage(), 0, 0, null);
-	}
+        // If the proxied shape could not be drawn for any reason or if
+        // this shape is simply a placeholder, then draw the default icon.
+        if (icon == null) {
+            try {
+                icon = new ImageIcon(getClass().getResource("/underc.png"));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                g2.setColor(Color.red);
+                g2.fillRect(0, 0, 60, 60);
+                return;
+            }
+        }
+        g2.drawImage(icon.getImage(), 0, 0, null);
+    }
 }
