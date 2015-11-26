@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>circle</artifactId>
-	<name>Circle Shape</name>
+	<artifactId>paint</artifactId>
+	<name>Paint Frame</name>
 	<description>
-        A bundle providing the implementation of a Circle Shape.
+        A bundle containing a frame used to paint shapes.
     </description>
 	<packaging>bundle</packaging>
 	<parent>
@@ -17,15 +17,16 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.apache.felix.ipojo.annotations</artifactId>
-			<version>1.8.0</version>
-		</dependency>
-		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.itsix.osgi</groupId>
 			<artifactId>shape</artifactId>
@@ -37,25 +38,16 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-ipojo-plugin</artifactId>
-				<version>1.8.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>ipojo-bundle</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Extension-Name>Circle</Extension-Name>
-						<Extension-Icon>circle.png</Extension-Icon>
-						<Extension-Class>com.itsix.osgi.shape.circle.Circle</Extension-Class>
+						<Bundle-Activator>com.itsix.osgi.paint.Activator</Bundle-Activator>
+						<Import-Package>
+							<![CDATA[
+								com.itsix.osgi.shape;version="$<range;[===,==+)>", *
+							]]>
+						</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>

@@ -18,16 +18,23 @@
  */
 package com.itsix.osgi.shape.circle;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import com.itsix.osgi.shape.SimpleShape;
+import org.apache.felix.ipojo.annotations.Provides;
+import org.apache.felix.ipojo.annotations.ServiceProperty;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-import com.itsix.osgi.shape.SimpleShape;
-
+@Component (immediate=true)
+//We use immediate to avoid delayed class loading
+@Provides
 public class Circle implements SimpleShape {
+	@ServiceProperty(name=SimpleShape.NAME_PROPERTY)
+	private String name = "Circle";
+	@ServiceProperty(name=SimpleShape.ICON_PROPERTY)
+	private ImageIcon icon =
+			new ImageIcon(this.getClass().getResource("/circle.png"));
 	/**
 	 * Implements the <tt>SimpleShape.draw()</tt> method for painting the shape.
 	 * 
