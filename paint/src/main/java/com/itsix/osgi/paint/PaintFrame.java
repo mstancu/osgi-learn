@@ -18,11 +18,12 @@
  */
 package com.itsix.osgi.paint;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
+import com.itsix.osgi.shape.SimpleShape;
+import org.apache.felix.ipojo.annotations.Provides;
+import org.apache.felix.ipojo.annotations.Component;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -31,14 +32,6 @@ import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
-
-import com.itsix.osgi.shape.SimpleShape;
-
 /**
  * This class represents the main application class, which is a JFrame subclass
  * that manages a toolbar of shapes and a drawing canvas. This class does not
@@ -46,6 +39,8 @@ import com.itsix.osgi.shape.SimpleShape;
  * with the available <tt>SimpleShape</tt> instances to eliminate any
  * dependencies on the OSGi application programming interfaces.
  **/
+@Component
+@Provides(specifications=java.awt.Window.class) //defines the provided interface (optional, default = all implemented interfaces)
 public class PaintFrame extends JFrame implements MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
 	private static final int SHAPE_SIZE = 54;
