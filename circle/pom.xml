@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>circle</artifactId>
+	<name>Circle Shape</name>
+	<description>
+        A bundle providing the implementation of a Circle Shape.
+    </description>
+	<packaging>bundle</packaging>
+	<parent>
+		<groupId>com.itsix.osgi</groupId>
+		<artifactId>paint-service</artifactId>
+		<version>0.0.3-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.itsix.osgi</groupId>
+			<artifactId>shape</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Extension-Name>Circle</Extension-Name>
+						<Extension-Icon>circle.png</Extension-Icon>
+						<Extension-Class>com.itsix.osgi.shape.circle.Circle</Extension-Class>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
