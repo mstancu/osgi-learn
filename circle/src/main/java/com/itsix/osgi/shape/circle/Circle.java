@@ -20,6 +20,7 @@ package com.itsix.osgi.shape.circle;
 
 import com.itsix.osgi.shape.SimpleShape;
 import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Provides;
 import org.apache.felix.ipojo.annotations.ServiceProperty;
 import org.osgi.framework.BundleContext;
@@ -30,19 +31,14 @@ import java.awt.geom.Ellipse2D;
 
 @Component(immediate = true)
 @Provides
+@Instantiate
 public class Circle implements SimpleShape {
-
-	private BundleContext context;
 
 	@ServiceProperty(name = SimpleShape.NAME_PROPERTY)
 	private String name = "Circle";
 
 	@ServiceProperty(name = SimpleShape.ICON_PROPERTY)
-	private Icon icon = new ImageIcon(context.getBundle().getResource("circle.png"));
-
-	public Circle(BundleContext context) {
-		this.context = context;
-	}
+	private Icon icon = new ImageIcon(getClass().getResource("/circle.png"));
 
 	/**
 	 * Implements the <tt>SimpleShape.draw()</tt> method for painting the shape.
