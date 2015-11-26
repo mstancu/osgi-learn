@@ -19,7 +19,6 @@
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.ipojo.annotations</artifactId>
-			<version>1.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.osgi</groupId>
@@ -38,7 +37,6 @@
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-ipojo-plugin</artifactId>
-				<version>1.8.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -51,14 +49,8 @@
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Extension-Name>Circle</Extension-Name>
-						<Extension-Icon>circle.png</Extension-Icon>
-						<Extension-Class>com.itsix.osgi.shape.circle.Circle</Extension-Class>
-					</instructions>
-				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 

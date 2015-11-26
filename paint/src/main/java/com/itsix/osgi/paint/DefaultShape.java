@@ -60,17 +60,9 @@ class DefaultShape implements SimpleShape {
 		// Do nothing.
 	}
 
-	/**
-	 * This constructs a proxy shape that lazily gets the shape service.
-	 * 
-	 * @param context
-	 *            The bundle context to use for retrieving the shape service.
-	 * @param reference
-	 *            The service reference of the service.
-	 **/
-	public DefaultShape(BundleContext context, ServiceReference reference) {
-		this.context = context;
-		this.reference = reference;
+
+	public DefaultShape(SimpleShape shape) {
+		this.shape = shape;
 	}
 
 	/**
