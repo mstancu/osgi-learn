@@ -1,3 +1,12 @@
+# Eclipse settings
 /.settings/
 /.project
+.classpath
 .settings
+
+# Intellij Idea section
+.idea
+**.iml
+
+# Maven compile artifacts
+**/target
