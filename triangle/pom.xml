@@ -17,6 +17,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.ipojo.annotations</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<scope>provided</scope>
@@ -32,15 +36,20 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-ipojo-plugin</artifactId>
+				<version>${ipojo.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>ipojo-bundle</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Extension-Name>Triangle</Extension-Name>
-						<Extension-Icon>triangle.png</Extension-Icon>
-						<Extension-Class>com.itsix.osgi.shape.triangle.Triangle</Extension-Class>
-					</instructions>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -18,6 +18,12 @@
  */
 package com.itsix.osgi.shape.square;
 
+import com.itsix.osgi.shape.SimpleShape;
+import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Provides;
+import org.apache.felix.ipojo.annotations.ServiceProperty;
+
+import javax.swing.ImageIcon;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -25,12 +31,16 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
-import com.itsix.osgi.shape.SimpleShape;
-
+@Component(immediate = true)
+@Provides
 public class Square implements SimpleShape {
+
+	@ServiceProperty(name = SimpleShape.NAME_PROPERTY)
+	String m_name = "Square";
+
+	@ServiceProperty(name = SimpleShape.ICON_PROPERTY)
+	ImageIcon m_icon = new ImageIcon(this.getClass().getResource("square.png"));
+
 	/**
 	 * Implements the <tt>SimpleShape.draw()</tt> method for painting the shape.
 	 * 
