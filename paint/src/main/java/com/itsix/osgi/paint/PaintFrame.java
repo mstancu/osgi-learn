@@ -18,22 +18,40 @@
  */
 package com.itsix.osgi.paint;
 
-import com.itsix.osgi.shape.SimpleShape;
-import org.apache.felix.ipojo.annotations.Bind;
-import org.apache.felix.ipojo.annotations.Instantiate;
-import org.apache.felix.ipojo.annotations.Invalidate;
-import org.apache.felix.ipojo.annotations.Unbind;
-import org.apache.felix.ipojo.annotations.Validate;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+
+import org.apache.felix.ipojo.annotations.Bind;
+import org.apache.felix.ipojo.annotations.Instantiate;
+import org.apache.felix.ipojo.annotations.Invalidate;
+import org.apache.felix.ipojo.annotations.Provides;
+import org.apache.felix.ipojo.annotations.Unbind;
+import org.apache.felix.ipojo.annotations.Validate;
+
+import com.itsix.osgi.paint.api.PaintApi;
+import com.itsix.osgi.paint.api.Shape;
+import com.itsix.osgi.paint.api.internal.ShapeImpl;
+import com.itsix.osgi.shape.SimpleShape;
 
 /**
  * This class represents the main application class, which is a JFrame subclass
@@ -42,10 +60,11 @@ import java.util.Map;
  * with the available <tt>SimpleShape</tt> instances to eliminate any
  * dependencies on the OSGi application programming interfaces.
  **/
-@org.apache.felix.ipojo.annotations.Component(immediate = true)
+@org.apache.felix.ipojo.annotations.Component(immediate = true, publicFactory = false)
 @Instantiate
+@Provides(specifications = PaintApi.class)
 public class PaintFrame extends JFrame
-        implements MouseListener, MouseMotionListener {
+        implements MouseListener, MouseMotionListener, PaintApi {
     private static final long serialVersionUID = 1L;
     private static final int SHAPE_SIZE = 54;
     private JToolBar toolbar;
@@ -92,6 +111,22 @@ public class PaintFrame extends JFrame
                 dispose();
             }
         });
+    }
+
+    public Collection<Shape> listShapes() {
+        List<Shape> shapes = new ArrayList<>();
+        Component[] components = contentPanel.getComponents();
+        for (Component component : components) {
+            if (component instanceof ShapeComponent) {
+                ShapeComponent shapeComponent = (ShapeComponent) component;
+                Rectangle bounds = component.getBounds();
+                shapes.add(new ShapeImpl(shapeComponent.getName(), bounds));
+            }
+        }
+        return shapes;
+    }
+
+    public void addShape(Shape shape) {
     }
 
     /**

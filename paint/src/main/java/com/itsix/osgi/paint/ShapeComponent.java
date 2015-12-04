@@ -32,38 +32,45 @@ import com.itsix.osgi.shape.SimpleShape;
  * <tt>SimpleShape</tt> to paint its contents.
  **/
 public class ShapeComponent extends JComponent {
-	private static final long serialVersionUID = 1L;
-	private PaintFrame frame;
-	private String shapeName;
+    private static final long serialVersionUID = 1L;
+    private PaintFrame frame;
+    private String shapeName;
 
-	/**
-	 * Construct a component for the specified drawing frame with the specified
-	 * named shape. The component acquires the named shape from the drawing
-	 * frame at the time of painting, which helps it account for dynamism.
-	 * 
-	 * @param frame
-	 *            The drawing frame associated with the component.
-	 * @param shapeName
-	 *            The name of the shape to draw.
-	 **/
-	public ShapeComponent(PaintFrame frame, String shapeName) {
-		this.frame = frame;
-		this.shapeName = shapeName;
-	}
+    /**
+     * Construct a component for the specified drawing frame with the specified
+     * named shape. The component acquires the named shape from the drawing
+     * frame at the time of painting, which helps it account for dynamism.
+     * 
+     * @param frame
+     *            The drawing frame associated with the component.
+     * @param shapeName
+     *            The name of the shape to draw.
+     **/
+    public ShapeComponent(PaintFrame frame, String shapeName) {
+        this.frame = frame;
+        this.shapeName = shapeName;
+    }
 
-	/**
-	 * Paints the contents of the component. The component acquires the named
-	 * shape from the drawing frame at the time of painting, which helps it
-	 * account for dynamism.
-	 * 
-	 * @param g
-	 *            The graphics object to use for painting.
-	 **/
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		SimpleShape shape = frame.getShape(shapeName);
-		shape.draw(g2, new Point(getWidth() / 2, getHeight() / 2));
-	}
+    /**
+     * Paints the contents of the component. The component acquires the named
+     * shape from the drawing frame at the time of painting, which helps it
+     * account for dynamism.
+     * 
+     * @param g
+     *            The graphics object to use for painting.
+     **/
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        SimpleShape shape = frame.getShape(shapeName);
+        shape.draw(g2, new Point(getWidth() / 2, getHeight() / 2));
+    }
+
+    @Override
+    public String getName() {
+        return shapeName;
+    }
+
 }
