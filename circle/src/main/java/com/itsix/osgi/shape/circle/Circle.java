@@ -18,13 +18,6 @@
  */
 package com.itsix.osgi.shape.circle;
 
-import com.itsix.osgi.shape.SimpleShape;
-import org.apache.felix.ipojo.annotations.Component;
-import org.apache.felix.ipojo.annotations.Provides;
-import org.apache.felix.ipojo.annotations.ServiceProperty;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -32,9 +25,19 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Ellipse2D;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Instantiate;
+import org.apache.felix.ipojo.annotations.Provides;
+import org.apache.felix.ipojo.annotations.ServiceProperty;
+
+import com.itsix.osgi.shape.SimpleShape;
+
 @Component(immediate = true)
 @Provides
-//@Instantiate
+@Instantiate
 public class Circle implements SimpleShape {
 
     @ServiceProperty(name = SimpleShape.NAME_PROPERTY)
