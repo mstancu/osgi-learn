@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import javax.servlet.ServletException;
-
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
@@ -64,7 +62,7 @@ public class RestOsgiManager {
                     LOAD_ON_STARTUP, ASYNC_SUPPORTED, defaultHttpContext);
             servletContainer.getServletContext()
                     .setAttribute(PaintApi.class.getName(), paintApi);
-        } catch (ServletException e) {
+        } catch (Exception e) {
         }
     }
 
