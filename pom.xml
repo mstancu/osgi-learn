@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.itsix.osgi</groupId>
 	<artifactId>paint-service</artifactId>
@@ -13,12 +14,15 @@
 		<module>triangle</module>
 		<module>square</module>
 		<module>paint</module>
-    <module>rest</module>
-  </modules>
+		<module>rest</module>
+	</modules>
 	<properties>
 		<osgi.version>4.0.0</osgi.version>
 		<bnd.version>3.0.0</bnd.version>
 		<ipojo.version>1.12.1</ipojo.version>
+		<jersey.version>1.18.3</jersey.version>
+		<jackson.version>1.9.9</jackson.version>
+		<pax.web.version>3.0.6</pax.web.version>
 	</properties>
 	<build>
 		<pluginManagement>
@@ -101,6 +105,50 @@
 				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
+			<!-- REST Servlet & JSON -->
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-server</artifactId>
+				<version>${jersey.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-core</artifactId>
+				<version>${jersey.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-json</artifactId>
+				<version>${jersey.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-servlet</artifactId>
+				<version>${jersey.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>${jackson.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.ops4j.pax.web</groupId>
+				<artifactId>pax-web-jetty-bundle</artifactId>
+				<version>${pax.web.version}</version>
+				<scope>compile</scope>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>
