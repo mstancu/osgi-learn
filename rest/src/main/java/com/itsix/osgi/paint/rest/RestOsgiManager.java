@@ -7,6 +7,7 @@ import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
+import org.ops4j.pax.web.service.WebContainer;
 
 import com.itsix.osgi.paint.api.PaintApi;
 import com.itsix.osgi.paint.api.Shape;
@@ -17,6 +18,9 @@ public class RestOsgiManager {
 
     @Requires(optional = true)
     PaintApi paintApi;
+
+    @Requires(optional = true)
+    private WebContainer webContainer;
 
     @Validate
     public void start() {
