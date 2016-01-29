@@ -8,4 +8,6 @@ public interface PaintApi {
 
     public void addShape(Shape shape);
 
+    public void deleteShape(Shape shape);
+
 }

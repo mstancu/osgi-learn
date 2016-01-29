@@ -126,6 +126,26 @@ public class PaintFrame extends JFrame
         return shapes;
     }
 
+    public void deleteShape(final Shape shape) {
+        SwingUtils.invokeAndWait(new Runnable() {
+            public void run() {
+                Component[] components = contentPanel.getComponents();
+                for (Component component : components) {
+                    if (component instanceof ShapeComponent) {
+                        ShapeComponent shapeComponent = (ShapeComponent) component;
+                        Rectangle bounds = component.getBounds();
+                        if (new ShapeImpl(shapeComponent.getName(), bounds)
+                                .equals(shape)) {
+                            contentPanel.remove(component);
+                            contentPanel.validate();
+                            contentPanel.repaint();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     public void addShape(final Shape shape) {
         final PaintFrame frame = this;
         SwingUtils.invokeAndWait(new Runnable() {
@@ -138,7 +158,7 @@ public class PaintFrame extends JFrame
                             SHAPE_SIZE);
                     contentPanel.add(sc, 0);
                     contentPanel.validate();
-                    contentPanel.repaint(sc.getBounds());
+                    contentPanel.repaint();
                 } else {
                     throw new IllegalArgumentException("Out of bounds");
                 }

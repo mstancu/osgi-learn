@@ -10,6 +10,15 @@ public class ShapeDTO implements Shape {
     private int y;
     private String name;
 
+    public ShapeDTO() {
+    }
+
+    public ShapeDTO(String name, int x, int y) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+    }
+
     public int getX() {
         return x;
     }

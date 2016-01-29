@@ -4,10 +4,12 @@ import java.util.Collection;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -38,6 +40,16 @@ public class Service {
     public void addShape(ShapeDTO shapeDTO) {
         PaintApi api = getPaintApi();
         api.addShape(shapeDTO);
+    }
+
+    @Path("shapes")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deleteShape(@QueryParam("name") String name,
+            @QueryParam("x") int x, @QueryParam("y") int y) {
+        ShapeDTO shapeDTO = new ShapeDTO(name, x, y);
+        PaintApi api = getPaintApi();
+        api.deleteShape(shapeDTO);
     }
 
     private PaintApi getPaintApi() {

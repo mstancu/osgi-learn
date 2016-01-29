@@ -45,4 +45,14 @@ public class ShapeImpl implements Shape {
         return height;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Shape) {
+            Shape other = (Shape) obj;
+            return getName().equals(other.getName()) && getX() == other.getX()
+                    && getY() == other.getY();
+        }
+        return false;
+    }
+
 }
