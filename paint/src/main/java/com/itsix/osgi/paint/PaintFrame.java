@@ -126,7 +126,24 @@ public class PaintFrame extends JFrame
         return shapes;
     }
 
-    public void addShape(Shape shape) {
+    public void addShape(final Shape shape) {
+        final PaintFrame frame = this;
+        SwingUtils.invokeAndWait(new Runnable() {
+            public void run() {
+                if (contentPanel.contains(shape.getX(), shape.getY())) {
+                    ShapeComponent sc = new ShapeComponent(frame,
+                            shape.getName());
+                    sc.setBounds(shape.getX() - SHAPE_SIZE / 2,
+                            shape.getY() - SHAPE_SIZE / 2, SHAPE_SIZE,
+                            SHAPE_SIZE);
+                    contentPanel.add(sc, 0);
+                    contentPanel.validate();
+                    contentPanel.repaint(sc.getBounds());
+                } else {
+                    throw new IllegalArgumentException("Out of bounds");
+                }
+            }
+        });
     }
 
     /**

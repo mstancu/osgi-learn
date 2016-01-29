@@ -14,8 +14,8 @@ public class ShapeImpl implements Shape {
 
     public ShapeImpl(String name, Rectangle bounds) {
         this.name = name;
-        this.x = bounds.x;
-        this.y = bounds.y;
+        this.x = bounds.x + bounds.width / 2;
+        this.y = bounds.y + bounds.height / 2;
         this.width = bounds.width;
         this.height = bounds.height;
     }
